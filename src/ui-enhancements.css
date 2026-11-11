@@ -1,0 +1,97 @@
+/* AsterPath interaction and theme layer. Loaded after ui.css so the existing
+   layout remains the source of truth while these refinements add accessible
+   states, a persistent dark theme, and clearer image overlays. */
+:root {
+  color-scheme: light;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --success: #386b3a;
+  --warning: #7a5711;
+  --danger: #8b382e;
+  --focus: #47761e;
+  --surface-raised: #fffefa;
+  --surface-soft: #eeede4;
+  --shadow-soft: 0 12px 32px rgba(25, 47, 40, .09);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #edf3eb;
+  --forest: #d5e8ce;
+  --forest-2: #b5d2aa;
+  --lime: #d7f38c;
+  --paper: #111a17;
+  --cream: #19231f;
+  --line: #34413a;
+  --muted: #afbbb2;
+  --white: #1b2621;
+  --focus: #d7f38c;
+  --success: #a8d99d;
+  --warning: #f0cf79;
+  --danger: #ffaaa0;
+  --surface-raised: #1b2621;
+  --surface-soft: #202d26;
+  --shadow-soft: 0 12px 32px rgba(0, 0, 0, .24);
+}
+
+html { color-scheme: light; }
+:root[data-theme="dark"] html { color-scheme: dark; }
+body { color: var(--ink); transition: background-color .22s ease, color .22s ease; }
+
+/* Compact, discoverable theme control; icon and text stay available to assistive technology. */
+.theme-toggle {
+  min-width: 42px;
+  min-height: 42px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  transition: color .18s ease, background-color .18s ease, border-color .18s ease, transform .18s ease;
+}
+.theme-toggle:hover { background: var(--surface-soft); border-color: var(--forest-2); transform: translateY(-1px); }
+.theme-toggle:active { transform: translateY(0) scale(.97); }
+.theme-toggle svg { width: 17px; height: 17px; flex: 0 0 auto; }
+.flow-head .theme-toggle-label { display: none; }
+
+/* Consistent icon alignment and action feedback. */
+.button svg, .text-link svg, .evidence-links svg, .saved-link svg { flex: 0 0 auto; }
+.button:active:not(:disabled) { transform: translateY(0) scale(.985); }
+.button:focus-visible, .theme-toggle:focus-visible, .menu-toggle:focus-visible,
+.icon-button:focus-visible, .choice-button:focus-visible, .flow-destination:focus-visible,
+.destination-card:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+.choice-button, .flow-destination, .destination-card, .result-item, .empty-results {
+  transition-property: color, background-color, border-color, box-shadow, transform;
+  transition-duration: .18s;
+  transition-timing-function: ease;
+}
+.choice-button:active, .destination-card:active, .flow-destination:active { transform: scale(.99); }
+.choice-button.selected { box-shadow: inset 3px 0 var(--success); }
+.choice-indicator { transition: background-color .16s ease, border-color .16s ease, transform .16s ease; }
+.choice-button.selected .choice-indicator { transform: scale(1.06); }
+.progress-track { overflow: hidden; }
+.progress-track span { transition: width .28s cubic-bezier(.2, .7, .3, 1); }
+.button:disabled { filter: saturate(.6); }
+
+/* Keep photography decorative while captions and destination names remain readable. */
+.hero-shade {
+  background:
+    linear-gradient(90deg, rgba(24, 59, 52, .20), rgba(12, 27, 24, .06) 40%, rgba(13, 28, 25, .23)),
+    linear-gradient(0deg, rgba(14, 30, 25, .72) 0%, rgba(14, 30, 25, .32) 24%, rgba(14, 30, 25, .04) 62%, transparent 100%);
+}
+.photo-caption {
+  padding: 15px 24px 15px 17px;
+}
