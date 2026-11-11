@@ -1,0 +1,45 @@
+ASTERPATH — PREMIUM LOCAL PREVIEW
+================================
+
+WINDOWS — EASIEST WAY
+1. Install Node.js version 20 or newer, if it is not installed.
+2. Extract the ZIP file to a folder. Do not try to run it inside the ZIP.
+3. Double-click run-windows.bat.
+4. Open http://localhost:4173 in your browser (the launcher also opens it).
+5. Stop the server by pressing Ctrl+C in the terminal window.
+
+WINDOWS — POWERSHELL ALTERNATIVE (avoids npm.ps1 policy errors)
+1. Open PowerShell inside the extracted folder.
+2. Run: node server.mjs
+3. Open http://localhost:4173
+
+MAC OR LINUX
+1. Open Terminal in the extracted folder.
+2. Run: node server.mjs
+3. Open http://localhost:4173
+
+PREVIEW AND SOURCE BUILD
+The ZIP includes the compiled React interface, so no npm install is needed to
+preview it. The server runs with Node's built-in modules. To edit and rebuild
+the React frontend, run: npm install, then npm run build.
+
+BUILT-IN TESTS
+Run: node --test
+
+UNIVERSITY DATA MODE
+The default app does not contain a live university feed. It returns no live
+recommendations until you obtain approved provider access and configure its
+HTTPS JSON feed. Read docs/LIVE-DATA-SETUP.md for the record requirements,
+official source routes, and configuration steps. The listed official portals
+are not automatically connected by this project.
+
+To configure a feed, copy .env.example to .env, set the approved feed URL,
+provider hostname allowlist, and optional token, then restart the server.
+Never put a real access token in browser code or share the .env file.
+
+DEMO MODE AND PRIVACY
+Append ?demo=1 to the local URL to see synthetic demonstration records. They
+are labelled synthetic and must not be used for university or financial
+decisions. Student preferences and demo staff requests use browser local
+storage; no real counsellor notification or application submission occurs.
+Do not enter real personal or sensitive student data in this preview.
